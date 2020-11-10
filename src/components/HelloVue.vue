@@ -4,23 +4,28 @@
  * @Autor: zhangyi
  * @Date: 2020-11-06 16:37:46
  * @LastEditors: zhangyi
- * @LastEditTime: 2020-11-10 09:44:17
+ * @LastEditTime: 2020-11-10 13:29:51
 -->
 <script>
-import { value, onMounted, onUnmounted } from 'vue';
-function useMouse() {
-  let x = value(0);
-  const changeValue = () => {
-    x.value ++;
-  }
-  onMounted(() => {
-    window.addEventListener('click', changeValue)
-  })
-  onUnmounted(() => {
-    window.removeEventListener('click', changeValue)
-  })
-  return x;
-}
+import { ref, onMounted, onUnmounted } from 'vue'
 
-export default useMouse;
+export function useMousePosition() {
+  const x = ref(0)
+  const y = ref(0)
+
+  function update(e) {
+    x.value = e.pageX
+    y.value = e.pageY
+  }
+
+  onMounted(() => {
+    window.addEventListener('mousemove', update)
+  })
+
+  onUnmounted(() => {
+    window.removeEventListener('mousemove', update)
+  })
+
+  return { x, y }
+}
 </script>

@@ -4,16 +4,18 @@
  * @Autor: zhangyi
  * @Date: 2020-11-06 16:28:51
  * @LastEditors: zhangyi
- * @LastEditTime: 2020-11-10 09:59:30
+ * @LastEditTime: 2020-11-10 13:32:20
 -->
 <template>
 	<div class="hello">
 		<button @click="addCount">{{count}}</button>
+    {{x}},{{y}}
 	</div>
 </template>
 
 <script>
 import { ref,watchEffect,onMounted } from 'vue';
+import useMousePosition from  './HelloVue';
 export default {
 
     setup() {
@@ -21,10 +23,11 @@ export default {
         const addCount = () => {
             count.value++;
 		};
+    const {x,y} = useMousePosition();
 		watchEffect(() => console.log(count.value))
 		onMounted(() => console.log('mounted!'));
 		
-		return { count, addCount};
+		return { count, addCount, x,y};
     },
 }
 </script>
