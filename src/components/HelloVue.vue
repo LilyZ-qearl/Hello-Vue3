@@ -4,14 +4,13 @@
  * @Autor: zhangyi
  * @Date: 2020-11-06 16:37:46
  * @LastEditors: zhangyi
- * @LastEditTime: 2020-11-10 13:29:51
+ * @LastEditTime: 2020-11-13 10:32:32
 -->
 <script>
-import { ref, onMounted, onUnmounted } from 'vue'
-
+import { ref, onMounted, onUnmounted } from 'vue';
 export function useMousePosition() {
-  const x = ref(0)
-  const y = ref(0)
+  let x = ref(0);
+  let y = ref(0);
 
   function update(e) {
     x.value = e.pageX
@@ -25,7 +24,6 @@ export function useMousePosition() {
   onUnmounted(() => {
     window.removeEventListener('mousemove', update)
   })
-
   return { x, y }
 }
 </script>
